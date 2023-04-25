@@ -8,10 +8,10 @@
 <div class="block pt-2 pb-[10vh]">
     <!-- Add a todo row -->
     <div class="flex items-center py-3">
-        <div class="offset-md-2 col-lg-9">
+        <div class="offset-md-2 col-lg-12">
             <form method="post" action="{% url 'todos:add' %}">
                 {% csrf_token %}
-                <div class="form-row">
+                <div class="w-full flex items-center justify-between">
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="title" placeholder="What you don't like to do?" required>
                     </div>
@@ -27,8 +27,8 @@
     <hr />
     <!-- todo list row -->
     <h1 class="text-center weight-bold text-green-800 text-3xl pt-2">Your Not-Todo List</h1>
-    <div class="flex pt-2">
-        <img class="col-lg-3 w-[350px] h-[200px]"
+    <div class="flex flex-wrap pt-2">
+        <img class="col-lg-3 w-[350px] h-[200px] hidden md:block"
             src="https://warehouse-camo.ingress.cmh1.psfhosted.org/e07aafde3d8d03cd19282c86e1fb3830fc68a725/68747470733a2f2f6465766361727065742e6e65742f696d616765732f646a616e676f2d73622d61646d696e2d322e706e67"
             alt="asd" />
         <div class="col-lg-6">
@@ -53,7 +53,7 @@
             </div>
         </div>
         
-        <img class="col-lg-3 w-[350px] h-[200px]" src="https://s3.amazonaws.com/creativetim_bucket/products/337/original/opt_md_django_thumbnail.jpg?1597827278"
+        <img class="col-lg-3 md:w-[350px] md:h-[200px] pt-2" src="https://s3.amazonaws.com/creativetim_bucket/products/337/original/opt_md_django_thumbnail.jpg?1597827278"
             alt="asd" />
     </div>
 </div>

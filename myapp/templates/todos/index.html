@@ -1,0 +1,61 @@
+{% extends 'todos/base.html' %}
+
+{% block title %}
+<title>Todo App</title>
+{% endblock %}
+
+{% block content %}
+<div class="block pt-2 pb-[10vh]">
+    <!-- Add a todo row -->
+    <div class="flex items-center py-3">
+        <div class="offset-md-2 col-lg-9">
+            <form method="post" action="{% url 'todos:add' %}">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="title" placeholder="What you don't like to do?" required>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" name="submit" class="btn btn-outline-primary">
+                            Add To List
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <!-- todo list row -->
+    <h1 class="text-center weight-bold text-green-800 text-3xl pt-2">Your Not-Todo List</h1>
+    <div class="flex pt-2">
+        <img class="col-lg-3 w-[350px] h-[200px]"
+            src="https://warehouse-camo.ingress.cmh1.psfhosted.org/e07aafde3d8d03cd19282c86e1fb3830fc68a725/68747470733a2f2f6465766361727065742e6e65742f696d616765732f646a616e676f2d73622d61646d696e2d322e706e67"
+            alt="asd" />
+        <div class="col-lg-6">
+            <div class="list-group">
+                {% for todo in todo_list %}
+                <div class="list-group-item flex items-center justify-start {% if todo.isCompleted %} todo-complete {% endif %}">
+                    <form style="display: inline;" method="post" action="{% url 'todos:update' todo.id %}">
+                        {% csrf_token %}
+                        <input type="checkbox" name="isCompleted" onchange="this.form.submit()" {% if todo.isCompleted %} checked {% endif %} class="todo-status-checkbox"
+                            title="{% if not todo.isCompleted %} mark as done {% else %} mark undone {% endif %}">
+                    </form>
+                <div class="w-full flex items-center justify-between ml-3">
+                    <div>
+                        {{ todo.title }}
+                    </div>
+                    <a href="{% url 'todos:delete' todo.id %}" title="Delete">
+                        <i class="far fa-trash-alt"></i>
+                    </a>
+                </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <img class="col-lg-3 w-[350px] h-[200px]" src="https://s3.amazonaws.com/creativetim_bucket/products/337/original/opt_md_django_thumbnail.jpg?1597827278"
+            alt="asd" />
+    </div>
+</div>
+
+{% endblock %}
